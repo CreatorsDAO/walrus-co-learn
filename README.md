@@ -1,7 +1,7 @@
 <div align="center">
-  <h1> xxxxx 共学 </h1>
+  <h1> Walrus 共学 </h1>
 
- <p> xxxxx  的目标是 xxx， 学习 xxxx  可以 xxxxx 。</p>
+ <p> Walrus 共学的的目标是 xxx， 学习 xxxx  可以 xxxxx 。</p>
 
  <p>
     <a href="https://github.com/CreatorsDAO"><img src="https://badgen.net/badge/icon/github?icon=github&label" alt="GitHub" /></a>
