@@ -25,7 +25,7 @@
 - 核心特性：成本效益、高容错性、Sui 区块链集成
 - 关键概念：存储周期（epochs）、代币经济学、存储节点角色
 
-### **2. 准备工作 & 安装与配置 → @星sir** https://docs-zh.walrus.site/usage/interacting.html （再补充）
+### **2. 准备工作 & 安装与配置 → @害虫** https://docs-zh.walrus.site/usage/interacting.html （再补充）
 
 - 设置 Sui 测试网钱包并获取 SUI 代币
 - WAL 代币及其子单位 FROST 简介
@@ -51,7 +51,7 @@
 - **成本管理**：使用可删除 blobs 优化存储成本
 - **公共访问**：确保数据公共访问，说明私密数据的存储限制
 
-### **5. 开发者工具与 API → @星 sir**
+### **5. 开发者工具与 API → @害虫 **
 
 - **CLI 命令**：关键命令（存储管理、系统状态、数据检索）
 - **JSON API**：使用 JSON 请求进行编程交互
