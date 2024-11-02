@@ -39,17 +39,18 @@
 
 ### **3. 理解 Walrus 操作 → @king**
 
-- 存储操作：存储、读取与管理 blobs
-- 链上与链下的交互（协调、支付和可用性认证）
-- 存储生命周期和可用性周期的详解
+- [存储操作：存储、读取与管理 blobs](https://docs-zh.walrus.site/dev-guide/dev-operations.html)
+- [链上与链下的交互（协调、支付和可用性认证）](https://docs-zh.walrus.site/design/operations-off-chain.html)
+- [存储生命周期和可用性周期的详解](https://docs-zh.walrus.site/design/operations-sui.html)
 
 ### **4. 主要功能 → @king**
 
 - **存储与检索**
-    - 使用 Walrus 客户端存储与检索 blobs
-    - 认证与可用性：创建和验证可用性证书
-- **成本管理**：使用可删除 blobs 优化存储成本
-- **公共访问**：确保数据公共访问，说明私密数据的存储限制
+    - [使用 Walrus 客户端存储与检索 blobs](https://docs-zh.walrus.site/design/architecture.html)
+    - [认证与可用性：创建和验证可用性证书](https://docs-zh.walrus.site/walrus-sites/authentication.html)
+- **成本管理**：[使用可删除 blobs 优化存储成本](https://docs-zh.walrus.site/design/encoding.html)
+- **公共访问**：[确保数据公共访问，说明私密数据的存储限制](https://docs-zh.walrus.site/walrus-sites/restrictions.html)
+- **Walrus站点技术规范**：[详细了解 Walrus 站点的端到端解析流程](https://docs-zh.walrus.site/walrus-sites/overview.html)
 
 ### **5. 开发者工具与 API → @害虫 **
 
