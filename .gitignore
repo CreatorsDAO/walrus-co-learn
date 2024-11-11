@@ -1,3 +1,7 @@
+#move
+**/build
+**.lock
+
 # Logs
 logs
 *.log
