@@ -5,6 +5,8 @@ module whitefaucet::nft{
         display,
     };
 
+    const POINTS_PER_CLAIM: u64 = 10;
+
     public struct BlackList has key, store{
         id: UID,
         list: vector<ID>,
@@ -21,6 +23,7 @@ module whitefaucet::nft{
         name: String,
         image_url: String,
         link: String,
+        points: u64,
     }
 
     fun init(otw:NFT,ctx:&mut TxContext){
@@ -61,14 +64,20 @@ module whitefaucet::nft{
         transfer::public_share_object(blackList);
     }
 
+    public(package) fun add_points(
+        member: &mut Member){
+            member.points = member.points + POINTS_PER_CLAIM;
+    }
+
     public fun add_member(
         _admin: &AdminCap,
         recipient:address,
         name:String,
         image_url:String,
         link:String,
+        points: u64,
         ctx:&mut TxContext){
-            let member = Member{id: object::new(ctx), name: name, image_url: image_url, link: link};
+            let member = Member{id: object::new(ctx), name: name, image_url: image_url, link: link, points: points};
             transfer::public_transfer(member,recipient);
     }
 
