@@ -11,7 +11,7 @@ module whitefaucet::faucet {
     };
     use sui::dynamic_field as df;
     use std::type_name::{Self, TypeName};
-    use whitefaucet::nft::{Member,BlackList,check_if_valid_member,add_points,get_last_claim,set_last_claim};
+    use whitefaucet::nft::{AdminCap,Member,BlackList,check_if_valid_member,add_points,get_last_claim,set_last_claim};
 
     const ETYPE_NOT_FOUND: u64 = 0;
     const EINVALID_MEMBER: u64 = 1;
@@ -24,12 +24,22 @@ module whitefaucet::faucet {
         id: UID,
     }
 
+    public struct ValidCoins has key, store {
+        id: UID,
+        coins: vector<TypeName>
+    }
+
     
     fun init(ctx: &mut TxContext) {
         let treasury = FaucetTreasury {
             id: object::new(ctx),
         };
+        let valid_coins = ValidCoins {
+            id: object::new(ctx),
+            coins: vector::empty<TypeName>(),
+        };
         transfer::share_object(treasury);
+        transfer::share_object(valid_coins);
     }
 
     
@@ -37,7 +47,9 @@ module whitefaucet::faucet {
         member: &mut Member,
         treasury: &mut FaucetTreasury,
         coin: Coin<T>,
+        valid_coins: &ValidCoins,
     ) {
+        assert!(vector::contains(&valid_coins.coins, &type_name::get<T>()), ETYPE_NOT_FOUND);
         let coin_balance = coin::into_balance(coin);
         let type_name = type_name::get<T>();
         
@@ -74,6 +86,15 @@ module whitefaucet::faucet {
         let amount = balance::value(balance) * PERCENTAGE_PER_CLAIM / 100;
         let withdrawn_balance = balance::split(balance, amount);
         coin::from_balance(withdrawn_balance, ctx)
+    }
+
+    public fun add_valid_coin<T>(
+        _admin: &AdminCap,
+        _coin: &Coin<T>,
+        valid_coins: &mut ValidCoins,
+    ){
+        let type_name = type_name::get<T>();
+        vector::push_back(&mut valid_coins.coins, type_name);
     }
 
 
