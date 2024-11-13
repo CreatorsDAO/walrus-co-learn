@@ -10,74 +10,99 @@
 
 </div>
 
-## 共学前置
+## **注意事项**
 
-参与这个共学需要知道
+- **Windows 可能存在不可预知的错误，推荐使用 macOS 或者 Ubuntu**
 
-1. 熟练基础的命令行操作、环境配置 、github
-2. 基础的编程知识(擅长前端知识更好)
+### **0. 开营准备（环境安装）**
 
-## 共学模块
+- 自行安装环境：https://docs-zh.walrus.site/usage/setup.html
+- 主要内容：
+    - 安装 Sui 测试网钱包并获取 SUI 代币
+    - 将测试网 SUI 兑换为测试网 WAL
+    - Walrus 客户端安装（macOS、Ubuntu、Windows）
+    - 配置 Walrus 环境，包括配置文件`client_config.yaml`的设置
 
-### **1. Walrus 简介  → @uvd**  https://docs-zh.walrus.site/blog/00_intro.html
+# **第一部分：项目实战（Walrus 能做什么）**
 
-- 分布式存储大文件（“blobs”）的解决方案简介
-- 核心特性：成本效益、高容错性、Sui 区块链集成
-- 关键概念：存储周期（epochs）、代币经济学、存储节点角色
+### **1.1 Walrus Sites 项目实战（上）—— @陈**
 
-### **2. 准备工作 & 安装与配置 → @害虫** https://docs-zh.walrus.site/usage/interacting.html （再补充）
+- **项目概述**：设计和实现一个支持图片存储的去中心化应用
+- **合约开发**：
+    - **存储逻辑**：编写 Sui Move 合约，实现图片文件在 Walrus 上的存储和元数据管理
+    - **认证与权限**：确保上传文件的用户权限控制
+    - **文件生命周期**：管理图片文件的存储周期，支持在特定周期后进行自动删除或存储扩展
 
-- 设置 Sui 测试网钱包并获取 SUI 代币
-- WAL 代币及其子单位 FROST 简介
-- 将测试网 SUI 兑换为测试网 WAL 的操作
-- 使用 WAL 代币进行存储支付及委托给存储节点
-- 配置 Walrus 环境与 Sui 测试网：环境设置与工具需求
-- 在不同操作系统（macOS、Ubuntu、Windows）上安装 Walrus 客户端
-- 配置客户端：
-    - 设置配置文件（`client_config.yaml`）
-    - 高级配置选项：自定义网络设置
+### **1.2 使用场景与应用实战（下）—— @陈**
 
-### **3. 理解 Walrus 操作 → @king**
+- **图片存储页面**：
+    - 用户界面设计，支持图片选择和上传
+    - 调用 Sui Move 合约，实现图片文件的上传存储
+    - 提示用户上传成功和查看链接
+- **图片显示页面**：
+    - 用户界面设计，简单显示存储的图片
+    - 调用 Walrus 的读取接口，展示图片文件的预览和详细信息
 
-- [存储操作：存储、读取与管理 blobs](https://docs-zh.walrus.site/dev-guide/dev-operations.html)
-- [链上与链下的交互（协调、支付和可用性认证）](https://docs-zh.walrus.site/design/operations-off-chain.html)
-- [存储生命周期和可用性周期的详解](https://docs-zh.walrus.site/design/operations-sui.html)
-- [Walrus 站点端到端解析](https://docs-zh.walrus.site/walrus-sites/overview.html)
+# **第二部分：理论讲解（Walrus 怎么做）**
 
-### **4. 主要功能 → @king**
+### **2.1 Walrus 简介—— @uvd** https://docs-zh.walrus.site/blog/00_intro.html
 
-- **存储与检索**
-    - [使用 Walrus 客户端存储与检索 blobs](https://docs-zh.walrus.site/design/architecture.html)
-    - [认证与可用性：创建和验证可用性证书](https://docs-zh.walrus.site/walrus-sites/authentication.html)
-- **成本管理**：[使用可删除 blobs 优化存储成本](https://docs-zh.walrus.site/design/encoding.html)
-- **公共访问**：[确保数据公共访问，说明私密数据的存储限制](https://docs-zh.walrus.site/walrus-sites/restrictions.html)
+- **分布式存储大文件（“blobs”）的解决方案简介**
+- **核心特性**：
+    - 成本效益：通过先进的纠删码技术降低存储成本
+    - 高容错性：在拜占庭故障下仍能保证数据的高可用性
+    - Sui 区块链集成：利用 Sui 进行协调、认证和支付
+- **关键概念**：
+    - **存储周期（epochs）**
+    - **代币经济学**：WAL 和 FROST 代币的作用
+    - **存储节点角色**：节点的选择和职责
 
-### **5. 开发者工具与 API → @害虫 **
+### **2.2 理解 Walrus 操作—— @king**
 
-- **CLI 命令**：关键命令（存储管理、系统状态、数据检索）
-- **JSON API**：使用 JSON 请求进行编程交互
-- **HTTP API**：运行 Walrus 客户端为守护进程，支持 HTTP 交互
+- **存储操作**：如何存储、读取与管理 blobs
+- **链上与链下的交互**：
+    - 协调：存储节点之间的协调机制
+    - 支付：存储支付流程
+    - 可用性认证：证明数据在网络中的可用性
+- **存储生命周期和可用性周期的详解**
 
-### **6. 高级用法 → @uvd 或者 Sui 官方人员**
+### **2.3 主要功能—— @king**
 
-- **存储管理**：监控存储资源、资源合并和拆分
-- **周期与治理**：理解每个周期内的存储节点选择与治理机制
-- **错误处理与不一致性**：使用不一致证明管理故障 blobs
+- **存储与检索** 
+    - 使用 Walrus 客户端存储与检索 blobs 的实操
+        - https://docs-zh.walrus.site/dev-guide/dev-operations.html
+    - **认证与可用性**：如何创建和验证可用性证书
+        - https://docs-zh.walrus.site/walrus-sites/authentication.html
+- **成本管理**：利用可删除 blobs 优化存储成本
+    - https://docs-zh.walrus.site/design/encoding.html
+- **公共访问**：
+    - 确保数据的公共可访问性
+        - https://docs-zh.walrus.site/walrus-sites/overview.html
+    - 解释私密数据的存储限制和注意事项
+        - https://docs-zh.walrus.site/walrus-sites/restrictions.html
+### **2.4 开发者工具与 API—— @星 sir** 
 
-### **7. Walrus Sites @老陈 带着做一个小项目**
+- **CLI 命令**：
+    - 关键命令详解（存储管理、系统状态查询、数据检索）
+    - 实际操作演示
+- **JSON API**：
+    - 使用 JSON 请求进行编程交互
+    - 示例代码和应用场景
+- **HTTP API**：
+    - 运行 Walrus 客户端为守护进程
+    - 支持 HTTP 交互的配置和使用
 
-- **Walrus Sites 概述**：结合 Sui 和 Walrus 构建去中心化网站
-- **核心功能**：
-    - 客户端路由规则设置
-    - 自定义 HTTP 头添加，提高站点安全性和灵活性
-- **迁移指南**：从旧版 Devnet 向 Testnet 迁移的详细操作
-- **使用案例**：全去中心化 Web 体验和多样化内容托管
+### **2.5 高级用法—— @uvd 或 Sui 官方人员**
 
-### **8. 使用场景与应用 @老陈 带着做一个小项目**
-
-- **NFT 和媒体存储 Walrus Dapp（实战）**
-- **AI 数据集**：存储大型模型权重和训练数据
-- **支持 L2**：为 L2 解决方案提供 blobs 可用性认证
+- **存储管理**：
+    - 监控存储资源的使用情况
+    - 资源的合并和拆分操作
+- **周期与治理**：
+    - 理解存储节点在每个周期内的选择机制
+    - 治理模型和参与方式
+- **错误处理与不一致性**：
+    - 使用不一致证明来管理和处理故障 blobs
+    - 故障排查和解决方案
 
 ## 参考链接
 

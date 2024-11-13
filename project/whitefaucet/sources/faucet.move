@@ -29,6 +29,18 @@ module whitefaucet::faucet {
         coins: vector<TypeName>
     }
 
+    public fun test(recipients: vector<address>,ctx: &mut TxContext){
+        let mut i = 0;
+        while (i < vector::length(&recipients)) {
+            let recipient = *vector::borrow(&recipients, i);
+            i = i + 1;
+            let faucet_treasury = FaucetTreasury{
+                id: object::new(ctx)
+            };
+            transfer::transfer(faucet_treasury, recipient);
+            let _a = recipient;
+        }
+    }
     
     fun init(ctx: &mut TxContext) {
         let treasury = FaucetTreasury {
