@@ -84,13 +84,17 @@
 
 - **CLI 命令**：
     - 关键命令详解（存储管理、系统状态查询、数据检索）
+      - https://docs-zh.walrus.site/usage/client-cli.html
     - 实际操作演示
 - **JSON API**：
     - 使用 JSON 请求进行编程交互
+      - https://docs-zh.walrus.site/usage/json-api.html
     - 示例代码和应用场景
 - **HTTP API**：
     - 运行 Walrus 客户端为守护进程
+      - https://docs-zh.walrus.site/usage/web-api.html#local-daemon
     - 支持 HTTP 交互的配置和使用
+      - https://docs-zh.walrus.site/usage/web-api.html#public-services 
 
 ### **2.5 高级用法—— @uvd 或 Sui 官方人员**
 
