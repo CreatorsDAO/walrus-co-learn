@@ -80,7 +80,7 @@
         - https://docs-zh.walrus.site/walrus-sites/overview.html
     - 解释私密数据的存储限制和注意事项
         - https://docs-zh.walrus.site/walrus-sites/restrictions.html
-### **2.4 开发者工具与 API—— @星 sir** 
+### **2.4 开发者工具与 API—— @害虫 ** 
 
 - **CLI 命令**：
     - 关键命令详解（存储管理、系统状态查询、数据检索）
