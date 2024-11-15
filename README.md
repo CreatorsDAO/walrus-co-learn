@@ -57,7 +57,7 @@
     - **代币经济学**：WAL 和 FROST 代币的作用
     - **存储节点角色**：节点的选择和职责
 
-### **2.2 理解 Walrus 操作—— @king**
+### **2.2 理解 Walrus 操作—— @king** https://docs-zh.walrus.site/design/operations.html
 
 - **存储操作**：如何存储、读取与管理 blobs
 - **链上与链下的交互**：
