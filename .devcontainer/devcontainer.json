@@ -1,0 +1,20 @@
+{
+  "build": { "dockerfile": "Dockerfile", "options": [ "--platform=linux/amd64" ] },
+  "runArgs": [
+    "--platform=linux/amd64"
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  },
+  "forwardPorts": [3456],
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+  "mounts": [
+    { "source": "${localWorkspaceFolder}/config/sui", "target": "/home/vscode/.sui/sui_config", "type": "bind" },
+    { "source": "${localWorkspaceFolder}/config/walrus", "target": "/home/vscode/.config/walrus", "type": "bind" },
+  ]
+}
