@@ -24,7 +24,7 @@
     - 配置 Walrus 环境，包括配置文件`client_config.yaml`的设置
 
 # **第一部分：项目实战（Walrus 能做什么）**
-
+代码仓库：https://github.com/hoh-zone/lets-walrus
 ### **1.1 Walrus Sites 项目实战（上）—— @陈**
 
 - **项目概述**：设计和实现一个支持图片存储的去中心化应用
