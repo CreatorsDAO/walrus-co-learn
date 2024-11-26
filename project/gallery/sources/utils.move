@@ -1,10 +1,8 @@
-module gallery::site{
+module gallery::utils{
     use std::string::String;
-    use sui::{
-        package,
-        display,
-        address
-    };
+    use sui::address;
+
+    // ===== to_b36 =====
 
     const BASE36: vector<u8> = b"0123456789abcdefghijklmnopqrstuvwxyz";
 
