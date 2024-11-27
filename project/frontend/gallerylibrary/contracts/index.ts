@@ -2,7 +2,7 @@ import { isValidSuiAddress } from "@mysten/sui/utils";
 import { suiClient } from "@/config";
 import { SuiObjectResponse } from "@mysten/sui/client";
 import { categorizeSuiObjects, CategorizedObjects } from "@/utils/assetsHelpers";
-
+import * as gallery from "./gallery";
 export const getUserProfile = async (address: string): Promise<CategorizedObjects> => {
   if (!isValidSuiAddress(address)) {
     throw new Error("Invalid Sui address");
@@ -28,3 +28,5 @@ export const getUserProfile = async (address: string): Promise<CategorizedObject
 
   return categorizeSuiObjects(allObjects);
 };
+
+export { gallery };
