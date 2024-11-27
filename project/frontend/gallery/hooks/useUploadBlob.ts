@@ -15,10 +15,10 @@ export interface UploadBlobConfig {
 }
 
 const DEFAULT_CONFIG: Required<UploadBlobConfig> = {
-    initialEpochs: '1',
-    initialPublisherUrl: 'https://publisher-devnet.walrus.space',
-    initialAggregatorUrl: 'https://aggregator-devnet.walrus.space',
-    proxyUrl: ''
+    initialEpochs: process.env.NEXT_PUBLIC_INITIAL_EPOCHS || '1',
+    initialPublisherUrl: process.env.NEXT_PUBLIC_PUBLISHER_URL || 'https://publisher-devnet.walrus.space',
+    initialAggregatorUrl: process.env.NEXT_PUBLIC_AGGREGATOR_URL || 'https://aggregator-devnet.walrus.space',
+    proxyUrl: process.env.NEXT_PUBLIC_PROXY_URL || ''
 };
 
 export function useUploadBlob(config: UploadBlobConfig = {}) {
