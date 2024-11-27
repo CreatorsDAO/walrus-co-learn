@@ -1,29 +1,51 @@
 'use client'
-import { ConnectButton } from '@mysten/dapp-kit'
+import { ConnectButton, useSignAndExecuteTransaction } from '@mysten/dapp-kit'
 import Image from 'next/image'
-import { getUserProfile } from '@/lib/contracts'
 import { useCurrentAccount } from '@mysten/dapp-kit'
-import { useEffect, useState } from 'react'
-import { CategorizedObjects, calculateTotalBalance, formatBalance } from '@/utils/assetsHelpers'
+import { useCallback, useEffect, useState } from 'react'
+import { gallery } from '@/contracts'
+import { useNetworkVariables } from '@/config'
+import { toast } from '@/hooks/use-toast'
+import { Library } from '@/contracts/gallery'
+import { LibraryCard } from '@/components/LibraryCard'
+import { CreateLibraryDialog } from '@/components/CreateLibraryDialog'
+
 
 export default function Home() {
   const account = useCurrentAccount();
-  const [userObjects, setUserObjects] = useState<CategorizedObjects | null>(null);
+  const networkVariables = useNetworkVariables();
+  const { mutate: signAndExecuteTransaction } = useSignAndExecuteTransaction();
+  const [libraries, setLibraries] = useState<Library[]>([]);
+
+
+  const fetchLibraries = useCallback(async () => {
+    if(!account) return;
+    const libraries = await gallery.getLibraries(networkVariables.state);
+    setLibraries(libraries);
+  }, [account, networkVariables]);
 
   useEffect(() => {
-    async function fetchUserProfile() {
-      if (account?.address) {
-        try {
-          const profile = await getUserProfile(account.address);
-          setUserObjects(profile);
-        } catch (error) {
-          console.error('Error fetching user profile:', error);
-        }
-      }
-    }
+    fetchLibraries();
+  }, [account, fetchLibraries]);
 
-    fetchUserProfile();
-  }, [account]);
+  const handleCreateLibrary = async (name: string) => {
+    const tx = await gallery.createLibrary(networkVariables, name);
+    await signAndExecuteTransaction({
+      transaction: tx,
+    }, {
+      onSuccess: () => {
+        toast({
+          title: "Library created successfully",
+          description: "Library created successfully",
+        });
+        fetchLibraries();
+      }
+    });
+  }
+
+  const handleViewDetails = (id: string) => {
+    window.open(`https://${id}.walrus.site`, "_blank");
+  }
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -31,52 +53,18 @@ export default function Home() {
         <div className="flex items-center rounded-full overflow-hidden">
           <Image src="/logo/logo.jpg" alt="Sui Logo" width={80} height={40} />
         </div>
-        <ConnectButton />
+        <div className="flex items-center gap-x-4">
+          <CreateLibraryDialog onSubmit={handleCreateLibrary} disabled={!account} />
+          <ConnectButton />
+        </div>
       </header>
-      {userObjects!=null ? (
-      <main className="flex-grow flex flex-col items-center p-8">        
-        {userObjects && (
-          <div className="w-full max-w-6xl">
-            <h2 className="text-2xl font-bold mb-4">Your Assets</h2>
-            
-            <div className="flex gap-8">
-              <div className="flex-1">
-                <h3 className="text-xl font-semibold mb-2">Coins</h3>
-                {Object.entries(userObjects.coins).map(([coinType, coins]) => {
-                  const totalBalance = calculateTotalBalance(coins);
-                  return (
-                    <div key={coinType} className="mb-4 p-4 bg-gray-100 rounded-lg">
-                      <h4 className="font-medium text-lg">{coinType.split('::').pop()}</h4>
-                      <p>Count: {coins.length}</p>
-                      <p>Total Balance: {formatBalance(totalBalance)}</p>
-                    </div>
-                  );
-                })}
-              </div>
-              
-              <div className="flex-1">
-                <h3 className="text-xl font-semibold mb-2">Other Objects</h3>
-                <div className="h-[500px] overflow-y-auto pr-4">
-                  {Object.entries(userObjects.objects).map(([objectType, objects]) => (
-                    <div key={objectType} className="mb-4 p-4 bg-gray-100 rounded-lg">
-                      <h4 className="font-medium text-lg">{objectType.split('::').pop()}</h4>
-                      <p>Count: {objects.length}</p>
-                      <p className="text-gray-500 text-sm">{objectType.split('::').pop()}</p>
-                      <p className="text-gray-500 text-sm">{objectType.split('::')[0]}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+      <main className="flex-grow p-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">  
+          {libraries.map((library) => (
+            <LibraryCard key={library.id.id} library={library} onViewDetails={handleViewDetails} />
+          ))}
+        </div>
       </main>
-      ):(
-        <div className="flex-grow flex flex-col items-center p-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-8">Welcome to Nextjs Sui Dapp Template</h1>
-          <h3 className="text-2xl font-bold text-gray-800 mb-8">Please connect your wallet to view your assets</h3>
-        </div>        
-      )}
     </div>
   );
 }
