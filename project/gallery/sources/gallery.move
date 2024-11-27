@@ -13,7 +13,7 @@ module gallery::gallery;
     };
     use gallery::utils::{to_b36};
 
-    const LIBRARY_VISUALIZATION_SITE:address = @0x1;
+    const LIBRARY_VISUALIZATION_SITE:address = @0xc74ed4dc6a2dd4659beb39396d3b10289557e0e52b0f2dddafc165dea95607cb;
 
     public struct State has key,store {
         id:UID,
