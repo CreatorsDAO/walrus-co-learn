@@ -13,4 +13,4 @@
 
 ### update
 + ``` cd ./walrus-sites```
-+ ```./target/release/site-builder update ../walrus-co-learn/project/frontend/gallerylibrary/out --force --e```
++ ```./target/release/site-builder update ../walrus-co-learn/project/frontend/gallerylibrary/out 0xc74ed4dc6a2dd4659beb39396d3b10289557e0e52b0f2dddafc165dea95607cb --force --epochs 99```
