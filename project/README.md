@@ -8,7 +8,7 @@
 + Browse the resulting site at: https://4ytxc2lx36n35jizgjtcbfddmwftg9vrxyqdh4wy3swmfo5juz.walrus.site
 
 ### publish
-+ ``` cd ./walrus-sites```
++ ``` cd ./walrus-sites && cargo build --release```
 + ```./target/release/site-builder publish ../walrus-co-learn/project/frontend/gallerylibrary/out --epochs 99```
 
 ### update

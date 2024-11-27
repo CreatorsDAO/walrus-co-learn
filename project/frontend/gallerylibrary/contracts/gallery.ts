@@ -10,6 +10,15 @@ type NetworkVariables = {
     state: string;
 }
 
+// public struct BlobLibrary has key{
+//     id:UID,
+//     name:String,
+//     owner:address,
+//     b36addr:String,
+//     member:vector<address>,
+//     blobs:vector<String>
+// }
+
 export type Library = {
     id: {id: string};
     name: string;
@@ -105,6 +114,7 @@ export const getLibrary = async (address: string) => {
 //public entry fun add_blob(library: &mut BlobLibrary, blob:String, ctx: &mut TxContext)
 export const addBlob = async (networkVariables: NetworkVariables, library: string, blob: string) => {
     const tx = new Transaction();
+    if(!isValidSuiObjectId(library)) throw new Error("Invalid library address");
     tx.moveCall(
         {
             package: networkVariables.package,
@@ -120,6 +130,7 @@ export const addBlob = async (networkVariables: NetworkVariables, library: strin
 }
 //public entry fun add_member(library: &mut BlobLibrary, member:address, ctx: &mut TxContext)
 export const addMember = async (networkVariables: NetworkVariables, library: string, member: string) => {
+    if(!isValidSuiObjectId(library)) throw new Error("Invalid library address");
     const tx = new Transaction();
     tx.moveCall(
         {
