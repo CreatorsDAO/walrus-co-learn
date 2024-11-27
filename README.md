@@ -45,7 +45,12 @@
 
 # **第二部分：理论讲解（Walrus 怎么做）**
 
-### **2.1 Walrus 简介—— @uvd** https://docs-zh.walrus.site/blog/00_intro.html
+### **2.1 Walrus 简介—— @uvd** 
+> 开发前言: https://docs-zh.walrus.site/blog/00_intro.html
+> 
+> 目标和用例: https://docs-zh.walrus.site/design/objectives_use_cases.html
+> 
+> 概述: https://docs-zh.walrus.site/design/overview.html
 
 - **分布式存储大文件（“blobs”）的解决方案简介**
 - **核心特性**：
